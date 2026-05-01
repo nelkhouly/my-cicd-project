@@ -6,9 +6,14 @@ pipeline {
         }
     }
 
+    environment {
+        DOCKER_CONFIG = '/tmp/.docker'
+    }
+
     stages {
         stage('Build Image') {
             steps {
+                sh 'mkdir -p $DOCKER_CONFIG'
                 sh 'docker build -t my-web-app:latest .'
             }
         }
