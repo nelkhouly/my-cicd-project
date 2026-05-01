@@ -28,7 +28,7 @@ pipeline {
             steps {
                 sh 'docker stop my-app-container || true'
                 sh 'docker rm my-app-container || true'
-                sh 'docker run -d -p 5000:5000 --name my-app-container my-web-app:latest'
+                sh 'docker run -d -p 5002:5000 --name my-app-container my-web-app:latest'
             }
         }
     }
