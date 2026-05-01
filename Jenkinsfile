@@ -1,20 +1,24 @@
 pipeline {
-     agent 
+    agent {
         docker {
             image 'docker:latest'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
+    }
+
     stages {
         stage('Build Image') {
             steps {
                 sh 'docker build -t my-web-app:latest .'
             }
         }
+
         stage('Run Tests') {
             steps {
-               
                 sh 'docker run --rm my-web-app:latest python3 test_app.py'
             }
         }
+
         stage('Deploy') {
             steps {
                 sh 'docker stop my-app-container || true'
