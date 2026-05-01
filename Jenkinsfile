@@ -1,5 +1,8 @@
 pipeline {
-    agent any
+     agent 
+        docker {
+            image 'docker:latest'
+        }
     stages {
         stage('Build Image') {
             steps {
@@ -8,7 +11,7 @@ pipeline {
         }
         stage('Run Tests') {
             steps {
-                // بنشغل التست جوه الـ Image اللي لسه بنينها
+               
                 sh 'docker run --rm my-web-app:latest python3 test_app.py'
             }
         }
